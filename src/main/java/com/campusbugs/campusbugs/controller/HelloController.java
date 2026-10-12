@@ -1,4 +1,4 @@
-package com.campusbugs.campusbugs;
+package com.campusbugs.campusbugs.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
