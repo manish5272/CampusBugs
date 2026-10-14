@@ -1,6 +1,8 @@
 package com.campusbugs.campusbugs.service;
 
+import com.campusbugs.campusbugs.config.JwtUtil;
 import com.campusbugs.campusbugs.dto.LoginRequest;
+import com.campusbugs.campusbugs.dto.LoginResponse;
 import com.campusbugs.campusbugs.dto.RegisterRequest;
 import com.campusbugs.campusbugs.model.Role;
 import com.campusbugs.campusbugs.model.User;
@@ -10,46 +12,48 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-
 @Service
 public class AuthService {
 
-        private final UserRepository userRepository;
-        private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-        public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-            this.userRepository = userRepository;
-            this.passwordEncoder = passwordEncoder;
+    public AuthService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       JwtUtil jwtUtil) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
+    }
+
+    public void register(RegisterRequest request) {
+        String roll = request.rollNumber().trim().toUpperCase();
+
+        if (userRepository.findByRollNumber(roll).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Roll number already registered");
         }
 
-        public void register(RegisterRequest request) {
+        User user = new User();
+        user.setRollNumber(roll);
+        user.setPasswordHash(passwordEncoder.encode(request.password()));
+        user.setRole(Role.STUDENT);
+        userRepository.save(user);
+    }
 
-            String roll = request.rollNumber().trim().toUpperCase();
+    public LoginResponse login(LoginRequest request) {
+        String roll = request.rollNumber().trim().toUpperCase();
 
-            if (userRepository.findByRollNumber(roll).isPresent()) {
-                throw new ResponseStatusException(HttpStatus.CONFLICT, "Roll number is already present");
+        User user = userRepository.findByRollNumber(roll)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.UNAUTHORIZED, "Invalid roll number or password"));
 
-            }
-
-            User user = new User();
-            user.setRollNumber(roll);
-            user.setPasswordHash(passwordEncoder.encode(request.password()));
-            user.setRole(Role.STUDENT);
-            userRepository.save(user);
+        if (!passwordEncoder.matches(request.password(), user.getPasswordHash())) {
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, "Invalid roll number or password");
         }
 
-        public void login(LoginRequest request){
-            String roll = request.rollNumber().trim().toUpperCase();
-
-            User user = userRepository.findByRollNumber(roll)
-                    .orElseThrow(() -> new ResponseStatusException(
-                            HttpStatus.UNAUTHORIZED,"INVALID ROLL NUMBER OR PASSWORD"));
-
-            if(!passwordEncoder.matches(request.password(), user.getPasswordHash())) {
-                throw new ResponseStatusException(
-                        HttpStatus.UNAUTHORIZED,"Invalid roll number or password");
-            }
-
-        }
-
+        String token = jwtUtil.generateToken(user.getRollNumber(), user.getRole());
+        return new LoginResponse(token, user.getRole().name());
+    }
 }
