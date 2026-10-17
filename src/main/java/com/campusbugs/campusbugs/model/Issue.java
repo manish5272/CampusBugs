@@ -40,6 +40,9 @@ public class Issue {
     //report count task given by claud
 
     private int reportCount=0;
+    private boolean hidden = false;
+
+
 
     public int getReportCount() {
         return reportCount;
@@ -114,5 +117,15 @@ public class Issue {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+
+    //for report to hiddening
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 }

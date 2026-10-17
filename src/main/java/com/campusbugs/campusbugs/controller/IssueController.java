@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import java.util.Map;
+
+
 @RestController
 @RequestMapping("/api/issues")
 public class IssueController {
@@ -38,6 +41,13 @@ public class IssueController {
     @PostMapping("/{id}/upvote")
     public IssueResponse upvote(@PathVariable Long id, Authentication authentication){
         return issueService.upvote(id, authentication.getName());
+    }
+
+
+    @PostMapping("/{id}/report")
+    public Map<String, String> report(@PathVariable Long id, Authentication authentication) {
+        issueService.report(id, authentication.getName());
+        return Map.of("message", "Thanks, your report was received");
     }
 
 
