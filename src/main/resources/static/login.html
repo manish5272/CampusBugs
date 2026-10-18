@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CampusBugs</title>
+    <!-- Sets the saved theme BEFORE the page paints, so there is no light flash in dark mode -->
+    <script>document.documentElement.setAttribute("data-bs-theme", localStorage.getItem("theme") || "light");</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar cb-navbar">
+    <div class="container">
+        <a class="navbar-brand cb-brand" href="login.html">🐞 Campus<span>Bugs</span></a>
+        <div class="d-flex align-items-center gap-2">
+            <button id="themeBtn" class="btn btn-sm btn-outline-secondary rounded-pill">🌙</button>
+            <button id="navLogin" class="btn btn-sm btn-outline-secondary rounded-pill px-3">Log in</button>
+            <button id="navSignup" class="btn btn-sm btn-brand px-3">Sign up</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row align-items-center g-5 hero">
+
+        <!-- Left side: what the app is -->
+        <div class="col-lg-6">
+            <h1>Report it.<br><span>Stay anonymous.</span></h1>
+            <p class="lead text-body-secondary mb-4">
+                Raise mess, hostel, Wi-Fi and lab problems, and upvote the ones that matter most.
+            </p>
+
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <div><strong>Verified, but anonymous</strong><br>
+                    <span class="text-body-secondary">Only real students join, but posts are stored with a scrambled fingerprint, never your roll number.</span></div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">▲</div>
+                <div><strong>Upvote what matters</strong><br>
+                    <span class="text-body-secondary">The most important problems rise to the top.</span></div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✅</div>
+                <div><strong>Track progress</strong><br>
+                    <span class="text-body-secondary">Every issue moves from Open to Seen to Resolved.</span></div>
+            </div>
+        </div>
+
+        <!-- Right side: login / sign up -->
+        <div class="col-lg-5 offset-lg-1">
+            <div class="panel">
+                <div id="message" class="alert d-none"></div>
+
+                <form id="loginForm">
+                    <h4 class="fw-bold mb-1">Welcome back</h4>
+                    <p class="text-body-secondary">Log in with your roll number.</p>
+                    <input id="loginRoll" class="form-control mb-3" placeholder="Roll number" required>
+                    <input id="loginPassword" type="password" class="form-control mb-3" placeholder="Password" required>
+                    <button class="btn btn-brand w-100 py-2">Log in</button>
+                    <p class="mt-3 mb-0 text-center">New here? <a href="#" id="showRegister">Create an account</a></p>
+                </form>
+
+                <form id="registerForm" class="d-none">
+                    <h4 class="fw-bold mb-1">Join CampusBugs</h4>
+                    <p class="text-body-secondary">Your roll number only verifies you. It is never stored with your posts.</p>
+                    <input id="registerRoll" class="form-control mb-3" placeholder="Roll number" required>
+                    <input id="registerPassword" type="password" class="form-control mb-3" placeholder="Password (min 6 characters)" required>
+                    <button class="btn btn-brand w-100 py-2">Sign up</button>
+                    <p class="mt-3 mb-0 text-center">Already registered? <a href="#" id="showLogin">Log in</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

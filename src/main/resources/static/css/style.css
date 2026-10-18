@@ -1,0 +1,290 @@
+/* ===== Colours =====
+   Bootstrap 5.3 switches light/dark when <html data-bs-theme="..."> changes.
+   These are our own extra variables on top of that. */
+:root {
+    --cb-brand: #e5484d;
+    --cb-brand-dark: #c93c41;
+    --cb-page-bg: #f1f3f8;
+}
+
+[data-bs-theme="dark"] {
+    --cb-page-bg: #0d1117;
+}
+
+body {
+    background-color: var(--cb-page-bg);
+    transition: background-color 0.2s;
+}
+
+.page {
+    max-width: 760px;
+}
+
+/* ===== Navbar ===== */
+.cb-navbar {
+    background: var(--bs-body-bg);
+    border-bottom: 1px solid var(--bs-border-color);
+    padding: 0.6rem 0;
+}
+
+.cb-brand {
+    font-weight: 800;
+    font-size: 1.35rem;
+    letter-spacing: -0.5px;
+    color: var(--bs-body-color);
+}
+
+.cb-brand:hover {
+    color: var(--bs-body-color);
+}
+
+.cb-brand span {
+    color: var(--cb-brand);
+}
+
+/* ===== Buttons and inputs ===== */
+.btn-brand {
+    background: var(--cb-brand);
+    border-color: var(--cb-brand);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 999px;
+}
+
+.btn-brand:hover,
+.btn-brand:focus {
+    background: var(--cb-brand-dark);
+    border-color: var(--cb-brand-dark);
+    color: #fff;
+}
+
+.btn-brand:disabled {
+    background: var(--cb-brand);
+    border-color: var(--cb-brand);
+    color: #fff;
+    opacity: 0.4;
+}
+
+.form-control,
+.form-select {
+    border-radius: 12px;
+    padding: 0.7rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--cb-brand);
+    box-shadow: 0 0 0 0.2rem rgba(229, 72, 77, 0.2);
+}
+
+/* A rounded "panel" used for the login box and the create form */
+.panel {
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: 18px;
+    padding: 1.75rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.counter {
+    font-size: 0.8rem;
+    text-align: right;
+    color: var(--bs-secondary-color);
+}
+
+/* ===== Login page ===== */
+.hero {
+    padding: 2.5rem 0;
+}
+
+.hero h1 {
+    font-weight: 800;
+    font-size: 2.8rem;
+    letter-spacing: -1px;
+}
+
+.hero h1 span {
+    color: var(--cb-brand);
+}
+
+.feature {
+    display: flex;
+    gap: 0.9rem;
+    margin-bottom: 1.1rem;
+}
+
+.feature-icon {
+    font-size: 1.6rem;
+    line-height: 1.2;
+}
+
+/* ===== Category pills ===== */
+.pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.pill {
+    border: 1px solid var(--bs-border-color);
+    background: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    border-radius: 999px;
+    padding: 0.3rem 0.95rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.pill:hover {
+    border-color: var(--cb-brand);
+}
+
+.pill.active {
+    background: var(--cb-brand);
+    border-color: var(--cb-brand);
+    color: #fff;
+}
+
+/* ===== Issue card ===== */
+.issue-card {
+    display: flex;
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-left-width: 5px;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.issue-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] .issue-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.issue-card.status-OPEN { border-left-color: #dc3545; }
+.issue-card.status-SEEN { border-left-color: #ffc107; }
+.issue-card.status-RESOLVED { border-left-color: #198754; }
+
+.vote-col {
+    width: 64px;
+    flex-shrink: 0;
+    background: var(--bs-tertiary-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 0.25rem;
+}
+
+.vote-btn {
+    border: none;
+    background: transparent;
+    font-size: 1.3rem;
+    line-height: 1;
+    padding: 0.25rem 0.55rem;
+    border-radius: 8px;
+    color: var(--bs-secondary-color);
+    transition: color 0.15s, background 0.15s;
+}
+
+.vote-btn:hover {
+    color: var(--cb-brand);
+    background: rgba(229, 72, 77, 0.12);
+}
+
+.vote-btn.voted {
+    color: var(--cb-brand);
+}
+
+.vote-count {
+    font-weight: 700;
+}
+
+.issue-body {
+    flex: 1;
+    min-width: 0;
+    padding: 1rem 1.25rem;
+}
+
+.issue-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0.6rem 0 0.35rem;
+}
+
+.issue-text {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    margin-bottom: 0.75rem;
+}
+
+.issue-footer {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.report-btn {
+    border: none;
+    background: transparent;
+    color: var(--bs-secondary-color);
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 8px;
+}
+
+.report-btn:hover:not(:disabled) {
+    color: #dc3545;
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.chip {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: var(--bs-tertiary-bg);
+    color: var(--bs-secondary-color);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--bs-secondary-color);
+}
+
+/* ===== Toast messages ===== */
+.toast-box {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.toast-msg {
+    padding: 0.65rem 1.2rem;
+    border-radius: 999px;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    animation: pop-in 0.2s ease;
+}
+
+.toast-ok { background: #198754; }
+.toast-error { background: #dc3545; }
+
+@keyframes pop-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+}
