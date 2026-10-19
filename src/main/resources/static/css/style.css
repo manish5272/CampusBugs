@@ -288,3 +288,11 @@ body {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: none; }
 }
+
+/* ===== Admin page ===== */
+.status-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}

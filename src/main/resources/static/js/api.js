@@ -125,6 +125,10 @@ function setupNavbar() {
     if (logoutButton) {
         logoutButton.addEventListener("click", logout);
     }
+    const adminLink = document.getElementById("adminLink");
+    if (adminLink && localStorage.getItem("role") === "ADMIN") {
+        adminLink.classList.remove("d-none");
+    }
     applyTheme(localStorage.getItem("theme") || "light");
 }
 
