@@ -7,3 +7,6 @@ JpaRepository gives CRUD methods without SQL, and method names like findByRollNu
 A unique constraint at the database level prevents duplicate votes.
 Issues and votes store only hashes, never user IDs, to keep posts anonymous.
 
+## 🔗 Live demo
+https://campusbugs.onrender.com
+(Free hosting: the first load after idle can take up to a minute.)
